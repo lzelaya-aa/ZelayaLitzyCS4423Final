@@ -15,6 +15,6 @@ public class ProjectileThrower : MonoBehaviour
         GameObject newProjectile = Instantiate(projectilePrefab,transform.position,Quaternion.identity);
         newProjectile.transform.rotation = Quaternion.LookRotation(transform.forward,targetPos - transform.position);
         newProjectile.GetComponent<Rigidbody2D>().velocity = newProjectile.transform.up * speed;
-        Destroy(newProjectile,3);
+        Destroy(newProjectile,3f);
     }
 }

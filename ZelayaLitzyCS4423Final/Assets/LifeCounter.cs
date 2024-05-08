@@ -13,7 +13,8 @@ public class LifeCounter : MonoBehaviour
 
     void Start()
     {
-        currentHearts = maxHearts;
+        // Load current hearts from PlayerPrefs or set to maxHearts if not found
+        currentHearts = PlayerPrefs.GetInt("CurrentHearts", maxHearts);
         UpdateHeartsUI();
     }
 
@@ -40,7 +41,18 @@ public class LifeCounter : MonoBehaviour
 
         if (currentHearts <= 0)
         {
+            // Save current hearts to PlayerPrefs before loading the menu scene
+                    // Delete playerprefs for life counter
+            PlayerPrefs.DeleteKey("CurrentHearts");
+
+            // Delete playerprefs for point counter
+            PlayerPrefs.DeleteKey("PointsCollected");
             SceneManager.LoadScene("Menu");
+        }
+        else
+        {
+            // Save current hearts to PlayerPrefs after losing a heart
+            PlayerPrefs.SetInt("CurrentHearts", currentHearts);
         }
     }
 }

@@ -13,4 +13,9 @@ public class MainMenuHandler : MonoBehaviour
     public void Quit(){
         Application.Quit();
     }
+
+    public void OpenOptions()
+    {
+        SceneManager.LoadScene("OptionsMenu");
+    }
 }

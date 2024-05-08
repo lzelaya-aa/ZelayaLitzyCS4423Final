@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Libriarian : MonoBehaviour
@@ -13,6 +14,7 @@ public class Libriarian : MonoBehaviour
 
     [Header("Physics")]
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] float minYForGameOver = -10f;
     [SerializeField] float jumpOffset = -.5f;
     [SerializeField] float jumpRadius = 2f;
     [SerializeField] float speed = 4f;
@@ -24,6 +26,21 @@ public class Libriarian : MonoBehaviour
 
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
+    }
+
+     void Update()
+    {
+        // Check if the player falls below the minYForGameOver
+        if (transform.position.y < minYForGameOver)
+        {
+            // Delete playerprefs for life counter
+            PlayerPrefs.DeleteKey("CurrentHearts");
+
+            // Delete playerprefs for point counter
+            PlayerPrefs.DeleteKey("PointsCollected");
+            // Load the menu scene
+            SceneManager.LoadScene("Menu");
+        }
     }
 
     public void MovePlayer(float direction)
